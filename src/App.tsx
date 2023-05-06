@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route, useSearchParams, useNavigate } from "react-router-dom";
+import { Table } from "./components";
+import { Redirect } from "./components";
+import { NavigateContext, SearchParamsContext } from "./context";
 
-function App() {
+export const App = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app__container">
+      <SearchParamsContext.Provider value={{ searchParams, setSearchParams }}>
+        <NavigateContext.Provider value={{ navigate }}>
+          <Routes>
+            <Route path="/" element={<Redirect />} />
+            <Route path={`/table/`} element={<Table />} />
+          </Routes>
+        </NavigateContext.Provider>
+      </SearchParamsContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
