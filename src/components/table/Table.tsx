@@ -5,6 +5,7 @@ import { TableDataType } from "../../types";
 import { Link } from "react-router-dom";
 import { selectItemsOptions } from "../../constants";
 import { SearchParamsContext } from "../../context";
+import Pagination from "../pagination/Pagination";
 
 export const Table = () => {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ export const Table = () => {
     maxPrice: "",
   });
   const { searchParams, setSearchParams } = useContext(SearchParamsContext);
+
   const handleDelete = async (id: number) => {
     const response = await fetch(`http://localhost:4000/api/inventory/${id}`, {
       method: "DELETE",
@@ -24,6 +26,7 @@ export const Table = () => {
       setDeleted(!deleted);
     }
   };
+
   const handlePricesFilter = (e: ChangeEvent<HTMLInputElement>) => {
     setPrices({ ...prices, [e.target.name]: e.target.value });
   };
@@ -38,10 +41,15 @@ export const Table = () => {
 
   useEffect(() => {
     const currentPage = searchParams.get("page");
-    if (!currentPage || parseInt(currentPage) < 0 || !data?.meta.totalPages) {
+    const totalPages = data?.meta?.totalPages;
+    const currentPageInt = currentPage ? parseInt(currentPage) : 0;
+
+    if (!currentPage || currentPageInt < 0 || (data && !totalPages)) {
+      setSearchParams(new URLSearchParams({ page: "0" }));
+    } else if (totalPages && currentPageInt > totalPages) {
       setSearchParams(new URLSearchParams({ page: "0" }));
     }
-  }, []);
+  }, [searchParams, setSearchParams, data]);
 
   return loading ? (
     <div>...loading</div>
@@ -121,6 +129,7 @@ export const Table = () => {
             ))}
         </tbody>
       </table>
+      <Pagination {...data?.meta} />
     </div>
   );
 };

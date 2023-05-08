@@ -1,0 +1,11 @@
+.add-input__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+.add__container {
+  display: flex;
+  flex-direction: column;
+}
