@@ -3,7 +3,7 @@ import "./Table.css";
 import { useFetch } from "../../utils";
 import { TableDataType } from "../../types";
 import { Link } from "react-router-dom";
-import { selectItemsOptions } from "../../constants";
+import { apiUrl, selectItemsOptions } from "../../constants";
 import { SearchParamsContext } from "../../context";
 import Pagination from "../pagination/Pagination";
 
@@ -18,7 +18,7 @@ export const Table = () => {
   const { searchParams, setSearchParams } = useContext(SearchParamsContext);
 
   const handleDelete = async (id: number) => {
-    const response = await fetch(`http://localhost:4000/api/inventory/${id}`, {
+    const response = await fetch(`${apiUrl}/inventory/${id}`, {
       method: "DELETE",
     });
     const data = await response.json();
@@ -33,7 +33,7 @@ export const Table = () => {
 
   const { data, loading }: { data: TableDataType | null; loading: boolean } =
     useFetch(
-      `http://localhost:4000/api/inventory?offset=22&name=${name}&address=${address}&page=${searchParams.get(
+      `${apiUrl}/inventory?offset=22&name=${name}&address=${address}&page=${searchParams.get(
         "page"
       )}&minPrice=${prices.minPrice}&maxPrice=${prices.maxPrice}`,
       deleted

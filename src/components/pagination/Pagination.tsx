@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { tableDataMetaType } from "../../types";
 import "./Pagination.css";
 import { SearchParamsContext } from "../../context";
-export default function Pagination({
+const Pagination = ({
   currentPage,
   totalItems,
   totalPages,
-}: tableDataMetaType) {
+}: tableDataMetaType) => {
   const { searchParams, setSearchParams } = useContext(SearchParamsContext);
 
   const handlePagination = (amount: number) => {
@@ -64,4 +64,6 @@ export default function Pagination({
       total Items:{totalItems}
     </div>
   );
-}
+};
+
+export default Pagination;

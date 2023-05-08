@@ -1,10 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddItem.css";
-import { selectItemsOptions } from "../../constants";
+import { apiUrl, selectItemsOptions } from "../../constants";
 import { Item } from "../../types";
 
-export default function AddItem() {
+const AddItem = () => {
   const [item, setItem] = useState<Item>({
     name: "",
     address: "მთავარი ოფისი",
@@ -39,7 +39,7 @@ export default function AddItem() {
       return;
     }
 
-    const response = await fetch(`http://localhost:4000/api/inventory`, {
+    const response = await fetch(`${apiUrl}/inventory`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -75,4 +75,6 @@ export default function AddItem() {
       </button>
     </div>
   );
-}
+};
+
+export default AddItem;
