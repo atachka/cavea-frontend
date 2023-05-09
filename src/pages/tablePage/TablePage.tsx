@@ -15,14 +15,15 @@ export const TablePage = () => {
     minPrice: "",
     maxPrice: ""
   });
-
+  const [sortBy, setSortBy] = useState("name");
+  const [sort, setSort] = useState("ASC");
   const { searchParams, setSearchParams } = useContext(SearchParamsContext);
 
   const { data, loading }: { data: TableDataType | null; loading: boolean } = useFetch(
-    getUrl({ name, address, page: searchParams.get("page"), prices }),
+    getUrl({ name, address, page: searchParams.get("page"), prices, sortBy, sort }),
     deleted
   );
-
+  console.log(sort, sortBy);
   useEffect(() => {
     const currentPage = searchParams.get("page");
     const totalPages = data?.meta?.totalPages;
@@ -49,6 +50,8 @@ export const TablePage = () => {
         loading={loading}
         setName={setName}
         setAddress={setAddress}
+        setSortBy={setSortBy}
+        setSort={setSort}
       />
       <Pagination {...data?.meta} />
     </div>

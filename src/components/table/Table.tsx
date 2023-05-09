@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import "./Table.css";
 import { getUrl } from "../../utils";
 import { TableProps } from "../../types";
@@ -12,7 +12,9 @@ export const Table = ({
   setName,
   setAddress,
   loading,
-  data
+  data,
+  setSortBy,
+  setSort
 }: TableProps) => {
   const handleDelete = async (id: number) => {
     const response = await fetch(`${getUrl()}/${id}`, {
@@ -28,6 +30,16 @@ export const Table = ({
     setPrices({ ...prices, [e.target.name]: e.target.value });
   };
 
+  const handleSort = (e: MouseEvent<HTMLDivElement>, order: string) => {
+    console.log((e.target as HTMLDivElement).id, order);
+    if ((e.target as HTMLDivElement).id === "name") {
+      setSortBy("name");
+    } else {
+      setSortBy("price");
+    }
+    setSort(order);
+  };
+
   return loading ? (
     <div>...loading</div>
   ) : (
@@ -37,11 +49,23 @@ export const Table = ({
           <thead>
             <tr>
               <th>
-                Name
+                <div className="table-header__container">
+                  Name
+                  <div className="table-sort-arrow" id="name" onClick={(e) => handleSort(e, "ASC")}>
+                    ↑
+                  </div>
+                  <div
+                    className="table-sort-arrow"
+                    id="name"
+                    onClick={(e) => handleSort(e, "DESC")}
+                  >
+                    ↓
+                  </div>
+                </div>
                 <input className="filter-input" onChange={(e) => setName(e.target.value)} />
               </th>
               <th>
-                Address
+                <div className="table-header__container">Address</div>
                 <select className="filter-input" onChange={(e) => setAddress(e.target.value)}>
                   {selectItemsOptions.map((item) => (
                     <option key={item.id} value={item.text === "ყველა" ? "" : item.text}>
@@ -51,7 +75,23 @@ export const Table = ({
                 </select>
               </th>
               <th>
-                Price
+                <div className="table-header__container">
+                  Price
+                  <div
+                    className="table-sort-arrow"
+                    id="price"
+                    onClick={(e) => handleSort(e, "ASC")}
+                  >
+                    ↑
+                  </div>
+                  <div
+                    className="table-sort-arrow"
+                    id="price"
+                    onClick={(e) => handleSort(e, "DESC")}
+                  >
+                    ↓
+                  </div>
+                </div>
                 <div className="table-price-fitlers__container">
                   minPrice:
                   <input

@@ -10,4 +10,6 @@ export interface TableProps {
   data: TableDataType | null;
   prices: { minPrice: string; maxPrice: string };
   deleted: boolean;
+  setSortBy: Dispatch<SetStateAction<string>>;
+  setSort: Dispatch<SetStateAction<string>>;
 }

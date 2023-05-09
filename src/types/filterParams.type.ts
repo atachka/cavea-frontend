@@ -6,4 +6,6 @@ export interface FilterParams {
     minPrice?: string;
     maxPrice?: string;
   };
+  sortBy: string;
+  sort: string;
 }

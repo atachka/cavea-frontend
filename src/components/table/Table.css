@@ -35,6 +35,14 @@ table th {
   padding-bottom: 10px;
 }
 
+.table-header__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 29px;
+  gap: 5px;
+}
+
 table td {
   text-align: left;
 
@@ -51,10 +59,25 @@ table td {
   width: 25%;
 }
 
+.table-sorts__container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
 .table-body__container {
   overflow: scroll;
   overflow-x: hidden;
   background: linear-gradient(45deg, #323086, #291985);
+}
+
+.table-sort__container {
+  display: flex;
+}
+
+.table-sort-arrow {
+  cursor: pointer;
+  font-size: 24px;
 }
 
 .table-body-item__container {
