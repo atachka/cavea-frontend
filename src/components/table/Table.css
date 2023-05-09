@@ -1,11 +1,13 @@
 .table-wrapper {
   height: fit-content;
-  max-height: 420px;
+  max-height: 700px;
 
   overflow: hidden;
   margin-top: 22px;
-  overflow-y: scroll;
   margin: 15px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border-radius: 15px;
 }
 
 table {
@@ -13,14 +15,14 @@ table {
   border-spacing: 0px;
 }
 tbody {
-  background: linear-gradient(90deg, #8d1515, #631985);
+  background-color: #f3f3f3;
 }
 table th {
   position: sticky;
   top: 0px;
 
-  background-color: #133b5c;
-  color: rgb(241, 245, 179);
+  background-color: #009879;
+  color: white;
 
   text-align: center;
   font-weight: normal;
@@ -59,11 +61,10 @@ table td {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
-  font-weight: 800;
+  font-size: 25px;
   height: 50px;
-  color: white;
-  border: none;
+  color: black;
+  border: 1px solid gainsboro;
   padding: 12px 12px;
   text-align: center;
 }

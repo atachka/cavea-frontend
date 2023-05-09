@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat";
 }
 
 .app__container {
@@ -13,12 +14,14 @@
   justify-content: center;
 }
 button {
-  background-color: rgb(21, 56, 131);
+  background-color: #009879;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
+  padding: 10px 15px;
+  font-size: 16px;
 }
 
 a {
@@ -31,10 +34,10 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #2c3234;
+  background: white;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f05a22;
+  background: #009879;
   border-radius: 15px;
 }

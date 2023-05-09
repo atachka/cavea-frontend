@@ -4,6 +4,10 @@
   flex-direction: column;
   margin-bottom: 15px;
   gap: 15px;
+  background-color: gainsboro;
+  padding: 15px;
+  border-radius: 10px;
+  color: black;
 }
 .add__container {
   display: flex;
