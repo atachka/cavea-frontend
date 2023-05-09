@@ -13,9 +13,9 @@ export const App = () => {
       <SearchParamsContext.Provider value={{ searchParams, setSearchParams }}>
         <NavigateContext.Provider value={{ navigate }}>
           <Routes>
-            <Route path="/" element={<Redirect />} />
+            <Route path="*" element={<Redirect />} />
             <Route path="/add" element={<AddItem />} />
-            <Route path={`/table/`} element={<Table />} />
+            <Route path={`/table`} element={<Table />} />
           </Routes>
         </NavigateContext.Provider>
       </SearchParamsContext.Provider>

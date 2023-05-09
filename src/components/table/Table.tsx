@@ -1,9 +1,9 @@
 import { useState, useEffect, ChangeEvent, useContext } from "react";
 import "./Table.css";
-import { useFetch } from "../../utils";
+import { getUrl, useFetch } from "../../utils";
 import { TableDataType } from "../../types";
 import { Link } from "react-router-dom";
-import { apiUrl, selectItemsOptions } from "../../constants";
+import { selectItemsOptions } from "../../constants";
 import { SearchParamsContext } from "../../context";
 import Pagination from "../pagination/Pagination";
 
@@ -13,16 +13,16 @@ export const Table = () => {
   const [deleted, setDeleted] = useState(true);
   const [prices, setPrices] = useState({
     minPrice: "",
-    maxPrice: "",
+    maxPrice: ""
   });
   const { searchParams, setSearchParams } = useContext(SearchParamsContext);
 
   const handleDelete = async (id: number) => {
-    const response = await fetch(`${apiUrl}/inventory/${id}`, {
-      method: "DELETE",
+    const response = await fetch(`${getUrl()}/${id}`, {
+      method: "DELETE"
     });
     const data = await response.json();
-    if (data.deleted) {
+    if (data.success) {
       setDeleted(!deleted);
     }
   };
@@ -31,13 +31,10 @@ export const Table = () => {
     setPrices({ ...prices, [e.target.name]: e.target.value });
   };
 
-  const { data, loading }: { data: TableDataType | null; loading: boolean } =
-    useFetch(
-      `${apiUrl}/inventory?offset=22&name=${name}&address=${address}&page=${searchParams.get(
-        "page"
-      )}&minPrice=${prices.minPrice}&maxPrice=${prices.maxPrice}`,
-      deleted
-    );
+  const { data, loading }: { data: TableDataType | null; loading: boolean } = useFetch(
+    getUrl({ name, address, page: searchParams.get("page"), prices }),
+    deleted
+  );
 
   useEffect(() => {
     const currentPage = searchParams.get("page");
@@ -63,19 +60,13 @@ export const Table = () => {
           <tr>
             <th>
               Name
-              <input
-                className="filter-input"
-                onChange={(e) => setName(e.target.value)}
-              />
+              <input className="filter-input" onChange={(e) => setName(e.target.value)} />
             </th>
             <th>
               Address
-              <select
-                className="filter-input"
-                onChange={(e) => setAddress(e.target.value)}
-              >
+              <select className="filter-input" onChange={(e) => setAddress(e.target.value)}>
                 {selectItemsOptions.map((item) => (
-                  <option key={item.id} value={item.text}>
+                  <option key={item.id} value={item.text === "ყველა" ? "" : item.text}>
                     {item.text}
                   </option>
                 ))}
@@ -120,9 +111,7 @@ export const Table = () => {
                 </td>
                 <td>
                   <div className="table-body-item__container">
-                    <button onClick={() => handleDelete(id)}>
-                      delete item
-                    </button>
+                    <button onClick={() => handleDelete(id)}>delete item</button>
                   </div>
                 </td>
               </tr>

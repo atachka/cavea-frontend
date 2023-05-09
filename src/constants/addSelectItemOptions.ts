@@ -1,6 +1,5 @@
 import { v4 as uuid } from "uuid";
-export const selectItemsOptions: { text: string; id: string }[] = [
-  { text: "ყველა", id: uuid() },
+export const addSelectItemOptions: { text: string; id: string }[] = [
   {
     text: "მთავარი ოფისი",
     id: uuid()

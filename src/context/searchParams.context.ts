@@ -5,5 +5,6 @@ export const SearchParamsContext = createContext<{
   setSearchParams: (params: URLSearchParams) => void;
 }>({
   searchParams: new URLSearchParams(),
-  setSearchParams: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setSearchParams: () => {}
 });

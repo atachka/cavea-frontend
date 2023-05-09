@@ -1,14 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddItem.css";
-import { apiUrl, selectItemsOptions } from "../../constants";
+import { addSelectItemOptions } from "../../constants";
 import { Item } from "../../types";
+import { getUrl } from "../../utils";
 
 const AddItem = () => {
   const [item, setItem] = useState<Item>({
     name: "",
     address: "მთავარი ოფისი",
-    price: "",
+    price: ""
   });
 
   const navigate = useNavigate();
@@ -17,14 +18,12 @@ const AddItem = () => {
     navigate(-1);
   };
 
-  const handleItemProperties = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleItemProperties = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setItem({ ...item, [e.target.name]: e.target.value });
   };
 
   const validate = (item: Item) => {
-    for (let key in item) {
+    for (const key in item) {
       if (item[key].length === 0) {
         alert(`${key} must not be empty`);
         return false;
@@ -39,16 +38,16 @@ const AddItem = () => {
       return;
     }
 
-    const response = await fetch(`${apiUrl}/inventory`, {
+    const response = await fetch(`${getUrl()}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ...item }),
+      body: JSON.stringify({ ...item })
     });
     const data = await response.json();
-    if (data.added) {
+    if (data.success) {
       navigate(-1);
     }
   };
@@ -60,7 +59,7 @@ const AddItem = () => {
         <input onChange={handleItemProperties} name="name" />
         address:
         <select onChange={handleItemProperties} name="address">
-          {selectItemsOptions.map((item) => (
+          {addSelectItemOptions.map((item) => (
             <option key={item.id} value={item.text}>
               {item.text}
             </option>
