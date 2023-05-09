@@ -2,9 +2,9 @@ import { useContext, memo } from "react";
 import { tableDataMetaType } from "../../types";
 import "./Pagination.css";
 import { SearchParamsContext } from "../../context";
-const Pagination = ({ currentPage, totalItems, totalPages }: tableDataMetaType) => {
-  const { searchParams, setSearchParams } = useContext(SearchParamsContext);
 
+export const Pagination = memo(({ currentPage, totalItems, totalPages }: tableDataMetaType) => {
+  const { searchParams, setSearchParams } = useContext(SearchParamsContext);
   const handlePagination = (amount: number) => {
     if (amount === 0 || !totalPages) {
       setSearchParams(new URLSearchParams({ page: "0" }));
@@ -24,6 +24,7 @@ const Pagination = ({ currentPage, totalItems, totalPages }: tableDataMetaType) 
       }
     }
   };
+
   return (
     <div className="pagination__container">
       <button onClick={() => handlePagination(0)} className="pagination-button__container">
@@ -42,6 +43,6 @@ const Pagination = ({ currentPage, totalItems, totalPages }: tableDataMetaType) 
       total Items:{totalItems}
     </div>
   );
-};
+});
 
-export default memo(Pagination);
+Pagination.displayName = "Pagination";

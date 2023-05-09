@@ -5,7 +5,7 @@ import { addSelectItemOptions } from "../../constants";
 import { Item } from "../../types";
 import { getUrl } from "../../utils";
 
-const AddItem = () => {
+export const AddItem = () => {
   const [item, setItem] = useState<Item>({
     name: "",
     address: "მთავარი ოფისი",
@@ -75,5 +75,3 @@ const AddItem = () => {
     </div>
   );
 };
-
-export default AddItem;

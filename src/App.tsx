@@ -1,9 +1,9 @@
 import "./App.css";
 import { Routes, Route, useSearchParams, useNavigate } from "react-router-dom";
-import { Table } from "./components";
 import { Redirect } from "./components";
 import { NavigateContext, SearchParamsContext } from "./context";
-import AddItem from "./components/addItem/AddItem";
+import { AddItem } from "./pages";
+import { TablePage } from "./pages";
 
 export const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +15,7 @@ export const App = () => {
           <Routes>
             <Route path="*" element={<Redirect />} />
             <Route path="/add" element={<AddItem />} />
-            <Route path={`/table`} element={<Table />} />
+            <Route path={`/table`} element={<TablePage />} />
           </Routes>
         </NavigateContext.Provider>
       </SearchParamsContext.Provider>

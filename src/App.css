@@ -3,9 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-::-webkit-scrollbar {
-  display: none;
-}
+
 .app__container {
   margin-top: 20px;
   width: 100%;
@@ -15,13 +13,28 @@
   justify-content: center;
 }
 button {
-  background-color: wheat;
+  background-color: rgb(21, 56, 131);
   color: white;
   border: none;
+  border-radius: 5px;
   padding: 5px;
   cursor: pointer;
 }
+
 a {
   color: white;
   text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2c3234;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f05a22;
+  border-radius: 15px;
 }

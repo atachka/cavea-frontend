@@ -1,42 +1,48 @@
-.table__container {
-  width: 100%;
-  max-width: 900px;
-  padding: 0 10px;
-  margin: 0 auto;
-  margin-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
+.table-wrapper {
+  height: fit-content;
+  max-height: 420px;
 
-.title {
-  text-align: center;
-  font-size: 26px;
-  margin-bottom: 30px;
+  overflow: hidden;
+  margin-top: 22px;
+  overflow-y: scroll;
+  margin: 15px;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px;
 }
+tbody {
+  background: linear-gradient(90deg, #8d1515, #631985);
+}
+table th {
+  position: sticky;
+  top: 0px;
 
-tr th {
+  background-color: #133b5c;
+  color: rgb(241, 245, 179);
+
+  text-align: center;
+  font-weight: normal;
   font-size: 18px;
-  padding: 12px;
-  border: 1px solid #eeeeee;
-  text-align: left;
-  background-color: rgba(217, 221, 146, 0.2);
 }
 
-tr td {
-  border: 1px solid #eeeeee;
+table th {
+  padding: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+table td {
   text-align: left;
+
+  font-size: 15px;
 }
 
 .table-price-fitlers__container {
   display: flex;
   gap: 5px;
+  justify-content: center;
 }
 
 .table-price-input {
@@ -44,17 +50,41 @@ tr td {
 }
 
 .table-body__container {
-  max-height: 400px;
   overflow: scroll;
   overflow-x: hidden;
+  background: linear-gradient(45deg, #323086, #291985);
 }
 
 .table-body-item__container {
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 800;
+  height: 50px;
+  color: white;
   border: none;
   padding: 12px 12px;
+  text-align: center;
 }
 
 .filter-input {
   width: 100%;
+}
+
+@media (max-width: 1050px) {
+  .table-body-item__container {
+    font-size: 20px;
+  }
+}
+@media (max-width: 720px) {
+  .table-body-item__container {
+    font-size: 10px;
+  }
+  .table-price-fitlers__container {
+    flex-direction: column;
+  }
+  .table-price-input {
+    width: 100%;
+  }
 }
